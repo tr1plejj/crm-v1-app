@@ -16,7 +16,7 @@ class Admin(QtWidgets.QMainWindow, admin.Ui_Dialog):
         name = self.name.text()
         price = self.price.text()
         desc = self.description.text()
-        bot.send_message(-1002112682526, name)
+        bot.send_message(-1002112682526, f'Товар: {name}\nЦена: {price}\nОписание: {desc}')
 
 if __name__ == '__main__':
     bot.polling()
