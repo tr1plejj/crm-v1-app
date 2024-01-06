@@ -1,18 +1,26 @@
-#6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI
-#https://api.telegram.org/bot6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI/getChat?chat_id=@fastsellandresell
+from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
+import admin
 import telebot
-from adminpanel import Admin
-class All(Admin):
-    def all_product(self):
+TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
+bot = telebot.TeleBot(TOKEN)
+
+class Admin(QtWidgets.QMainWindow, admin.Ui_Dialog):
+    def __init__(self, parent=None):
+        super(Admin, self).__init__(parent)
+        self.setupUi(self)
+        self.send_button.clicked.connect(self.message_in_channel)
+
+    @bot.message_handler()
+    def message_in_channel(self, message):
         name = self.name.text()
         price = self.price.text()
         desc = self.description.text()
-        @bot.message_handler(commands=['send'])
-        def message_in_channel(message):
-            bot.send_message(-1002112682526, name)
+        bot.send_message(-1002112682526, name)
 
-TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
-
-bot = telebot.TeleBot(TOKEN)
-
-bot.infinity_polling()
+if __name__ == '__main__':
+    bot.polling()
+    app = QtWidgets.QApplication(sys.argv)
+    a = Admin()
+    a.show()
+    app.exec_()
