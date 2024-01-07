@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import admin
 import telebot
+
 TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
 bot = telebot.TeleBot(TOKEN)
 
@@ -18,8 +19,9 @@ class Admin(QtWidgets.QMainWindow, admin.Ui_Dialog):
         desc = self.description.text()
         bot.send_message(-1002112682526, f'Товар: {name}\nЦена: {price}\nОписание: {desc}')
 
+bot.polling()
+
 if __name__ == '__main__':
-    bot.polling()
     app = QtWidgets.QApplication(sys.argv)
     a = Admin()
     a.show()
