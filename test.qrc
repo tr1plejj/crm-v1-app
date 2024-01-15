@@ -1,5 +1,5 @@
 <RCC>
   <qresource prefix="newPrefix">
-    <file>../Users/01iVe/Downloads/pic.jpg</file>
+    <file>pic.png</file>
   </qresource>
 </RCC>
