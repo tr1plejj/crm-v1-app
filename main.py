@@ -1,3 +1,4 @@
+# python -m PyQt5.uic.pyuic -x [FILENAME].ui -o [FILENAME].py
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import admin
@@ -5,7 +6,7 @@ import telebot
 
 TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
 bot = telebot.TeleBot(TOKEN)
-
+bot.polling()
 class Admin(QtWidgets.QMainWindow, admin.Ui_Dialog):
     def __init__(self, parent=None):
         super(Admin, self).__init__(parent)
@@ -18,8 +19,6 @@ class Admin(QtWidgets.QMainWindow, admin.Ui_Dialog):
         price = self.price.text()
         desc = self.description.text()
         bot.send_message(-1002112682526, f'Товар: {name}\nЦена: {price}\nОписание: {desc}')
-
-bot.polling()
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

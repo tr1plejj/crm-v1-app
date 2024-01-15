@@ -16,17 +16,22 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(568, 630)
         self.name = QtWidgets.QLineEdit(Dialog)
-        self.name.setGeometry(QtCore.QRect(270, 170, 151, 41))
+        self.name.setGeometry(QtCore.QRect(200, 240, 181, 41))
         self.name.setObjectName("name")
         self.price = QtWidgets.QLineEdit(Dialog)
-        self.price.setGeometry(QtCore.QRect(270, 260, 151, 41))
+        self.price.setGeometry(QtCore.QRect(200, 320, 181, 41))
         self.price.setObjectName("price")
         self.description = QtWidgets.QLineEdit(Dialog)
-        self.description.setGeometry(QtCore.QRect(280, 370, 181, 71))
+        self.description.setGeometry(QtCore.QRect(200, 390, 181, 71))
         self.description.setObjectName("description")
         self.send_button = QtWidgets.QPushButton(Dialog)
-        self.send_button.setGeometry(QtCore.QRect(230, 540, 131, 31))
+        self.send_button.setGeometry(QtCore.QRect(210, 540, 131, 31))
         self.send_button.setObjectName("send_button")
+        self.label = QtWidgets.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(170, 70, 251, 101))
+        self.label.setStyleSheet("image: url(:/newPrefix/Users/01iVe/Downloads/pic.jpg);")
+        self.label.setText("")
+        self.label.setObjectName("label")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -35,6 +40,7 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.send_button.setText(_translate("Dialog", "send"))
+# import test_rc
 
 
 if __name__ == "__main__":
