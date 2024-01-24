@@ -14,5 +14,4 @@ def main_func(message):
 @bot.message_handler(func=lambda message: message.text == 'Сделать заказ')
 def answer_on_offer(message):
     bot.send_message(message.chat.id, 'Введите id товара', reply_markup=types.ReplyKeyboardRemove())
-
 bot.polling()

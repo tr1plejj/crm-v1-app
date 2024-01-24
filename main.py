@@ -2,6 +2,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import admin
+# from config import user, host, password, db_name
+from config import add_in_db
 import telebot
 from telebot import types
 
@@ -24,14 +26,25 @@ class Admin(QtWidgets.QMainWindow, admin.Ui_Dialog):
         price = self.price.text()
         desc = self.description.text()
         pic = self.pic_path.text()
-        markup = types.InlineKeyboardMarkup()
-        offer_button = types.InlineKeyboardButton(text='Offer', url='t.me/ReOrSellerBot')
-        markup.add(offer_button)
-        img = open(pic, 'rb')
-        bot.send_photo(tgk_chat_id,
-                       photo=img,
-                       caption=f'Товар: {name}\nЦена: {price}\nОписание: {desc}',
-                       reply_markup=markup)
+        try:
+            prod_id = add_in_db(name, price, desc)
+            prod_id = prod_id[0]
+            markup = types.InlineKeyboardMarkup()
+            offer_button = types.InlineKeyboardButton(text='Offer', url='t.me/ReOrSellerBot')
+            markup.add(offer_button)
+            img = open(pic, 'rb')
+            bot.send_photo(tgk_chat_id,
+                           photo=img,
+                           caption=f'Товар: {name}\nЦена: {price}\nОписание: {desc}\nID товара: {prod_id}',
+                           reply_markup=markup)
+        except:
+            print('неверно введены какие-либо данные')
+
+        finally:
+            self.name.clear()
+            self.price.clear()
+            self.description.clear()
+            self.pic_path.clear()
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
