@@ -34,3 +34,33 @@ def add_in_db(name, price, description):
                 password=password,
                 database=db_name
             ).close()
+
+def take_from_db(id):
+    try:
+        connection = psycopg2.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=db_name
+        )
+        with connection.cursor() as cursor:
+            cursor.execute(f"select name, price, description from prod_data where id = {id}")
+            about_prod = cursor.fetchall()
+        connection.commit()
+        return about_prod
+    except Exception as _ex:
+        print('[INFO]', _ex)
+
+    finally:
+        if psycopg2.connect(
+                host=host,
+                user=user,
+                password=password,
+                database=db_name
+        ):
+            psycopg2.connect(
+                host=host,
+                user=user,
+                password=password,
+                database=db_name
+            ).close()
