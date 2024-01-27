@@ -1,5 +1,6 @@
 import telebot
 from config import take_from_db
+import requests
 
 from telebot import types
 TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
@@ -16,13 +17,12 @@ def main_func(message):
 def answer_on_offer(message):
     bot.send_message(message.chat.id, 'Введите id товара', reply_markup=types.ReplyKeyboardRemove())
 
-    @bot.message_handler()
-    def return_db_data(message):
-        data = take_from_db(message.text)
-        name = data[0][0]
-        price = data[0][1]
-        desc = data[0][2]
-        bot.send_message(message.chat.id, f'{name} {price} {desc}')
-
+@bot.message_handler()
+def return_db_data(message):
+    data = requests.get(f'http://127.0.0.1:8000/{message.text}').json()
+    name = data[0][0]
+    price = data[0][1]
+    desc = data[0][2]
+    bot.send_message(message.chat.id, f'{name} {price} {desc}')
 
 bot.polling()

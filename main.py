@@ -3,9 +3,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import admin
 # from config import user, host, password, db_name
-from config import add_in_db
+# from config import add_in_db
 import telebot
 from telebot import types
+import requests
 
 TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
 bot = telebot.TeleBot(TOKEN)
@@ -27,7 +28,7 @@ class Admin(QtWidgets.QMainWindow, admin.Ui_Dialog):
         desc = self.description.text()
         pic = self.pic_path.text()
         try:
-            prod_id = add_in_db(name, price, desc)
+            prod_id = requests.get(f'http://127.0.0.1:8000/{name}/{price}/{desc}').json()
             prod_id = prod_id[0]
             markup = types.InlineKeyboardMarkup()
             offer_button = types.InlineKeyboardButton(text='Offer', url='t.me/ReOrSellerBot')
