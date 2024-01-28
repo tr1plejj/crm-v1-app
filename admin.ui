@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>568</width>
+    <width>562</width>
     <height>630</height>
    </rect>
   </property>
@@ -96,6 +96,19 @@
    </property>
    <property name="text">
     <string>load</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="forward_button">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>590</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>forward</string>
    </property>
   </widget>
  </widget>

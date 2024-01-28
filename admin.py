@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(568, 630)
+        Dialog.resize(562, 630)
         self.name = QtWidgets.QLineEdit(Dialog)
         self.name.setGeometry(QtCore.QRect(170, 370, 181, 41))
         self.name.setObjectName("name")
@@ -39,6 +39,9 @@ class Ui_Dialog(object):
         self.load_pic_button = QtWidgets.QPushButton(Dialog)
         self.load_pic_button.setGeometry(QtCore.QRect(230, 310, 61, 20))
         self.load_pic_button.setObjectName("load_pic_button")
+        self.forward_button = QtWidgets.QPushButton(Dialog)
+        self.forward_button.setGeometry(QtCore.QRect(440, 590, 75, 23))
+        self.forward_button.setObjectName("forward_button")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -48,6 +51,7 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.send_button.setText(_translate("Dialog", "send"))
         self.load_pic_button.setText(_translate("Dialog", "load"))
+        self.forward_button.setText(_translate("Dialog", "forward"))
 
 
 if __name__ == "__main__":

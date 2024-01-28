@@ -8,16 +8,21 @@ import telebot
 from telebot import types
 import requests
 
+import offers
+
 TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
 bot = telebot.TeleBot(TOKEN)
 tgk_chat_id = -1002112682526
-class Admin(QtWidgets.QMainWindow, admin.Ui_Dialog):
+class Admin_Send(QtWidgets.QMainWindow, admin.Ui_Dialog):
     def __init__(self, parent=None):
-        super(Admin, self).__init__(parent)
+        super(Admin_Send, self).__init__(parent)
         self.setupUi(self)
         self.load_pic_button.clicked.connect(self.add_image)
         self.send_button.clicked.connect(self.message_in_channel)
+        self.forward_button.clicked.connect(self.gotoOffers)
 
+    def gotoOffers(self):
+        widget.setCurrentWidget(admin_offers)
     def add_image(self):
         pic = self.pic_path.text()
         self.label.setPixmap(QtGui.QPixmap(pic))
@@ -47,8 +52,22 @@ class Admin(QtWidgets.QMainWindow, admin.Ui_Dialog):
             self.description.clear()
             self.pic_path.clear()
 
+class Admin_Offers(QtWidgets.QMainWindow, offers.Ui_Dialog):
+    def __init__(self, parent = None):
+        super(Admin_Offers, self).__init__(parent)
+        self.setupUi(self)
+        self.back_button.clicked.connect(self.gotoPanel)
+
+    def gotoPanel(self):
+        widget.setCurrentWidget(admin_send)
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    a = Admin()
-    a.show()
+    widget = QtWidgets.QStackedWidget()
+    admin_send = Admin_Send()
+    admin_offers = Admin_Offers()
+    widget.addWidget(admin_send)
+    widget.addWidget(admin_offers)
+    widget.setFixedSize(562, 630)
+    widget.show()
     app.exec_()
