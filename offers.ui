@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="back_button">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>500</y>
+     <x>60</x>
+     <y>510</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -25,6 +25,31 @@
    <property name="text">
     <string>back</string>
    </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>180</y>
+     <width>491</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Название</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Идентификатор</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Адрес доставки</string>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>

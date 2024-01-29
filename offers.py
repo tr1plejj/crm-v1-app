@@ -16,8 +16,19 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(691, 597)
         self.back_button = QtWidgets.QPushButton(Dialog)
-        self.back_button.setGeometry(QtCore.QRect(130, 500, 75, 23))
+        self.back_button.setGeometry(QtCore.QRect(60, 510, 75, 23))
         self.back_button.setObjectName("back_button")
+        self.tableWidget = QtWidgets.QTableWidget(Dialog)
+        self.tableWidget.setGeometry(QtCore.QRect(130, 180, 491, 201))
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -26,6 +37,12 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.back_button.setText(_translate("Dialog", "back"))
+        item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("Dialog", "Название"))
+        item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(_translate("Dialog", "Идентификатор"))
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("Dialog", "Адрес доставки"))
 
 
 if __name__ == "__main__":
