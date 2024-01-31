@@ -22,9 +22,9 @@ class AdminSend(QtWidgets.QMainWindow, admin.Ui_Dialog):
         self.setupUi(self)
         self.load_pic_button.clicked.connect(self.add_image)
         self.send_button.clicked.connect(self.message_in_channel)
-        self.forward_button.clicked.connect(self.gotoOffers)
+        self.forward_button.clicked.connect(self.gotooffers)
 
-    def gotoOffers(self):
+    def gotooffers(self):
         widget.setCurrentWidget(admin_offers)
 
     def add_image(self):
@@ -38,7 +38,7 @@ class AdminSend(QtWidgets.QMainWindow, admin.Ui_Dialog):
         desc = self.description.text()
         pic = self.pic_path.text()
         try:
-            prod_id = requests.get(f'http://127.0.0.1:8000/put_in_db/{name}/{price}/{desc}').json()
+            prod_id = (requests.post(f'http://127.0.0.1:8000/put_in_db?name={name}&price={price}&description={desc}').json())
             prod_id = prod_id[0]
             markup = types.InlineKeyboardMarkup()
             offer_button = types.InlineKeyboardButton(text='Offer', url='t.me/ReOrSellerBot')
@@ -62,10 +62,11 @@ class AdminOffers(QtWidgets.QMainWindow, offers.Ui_Dialog):
     def __init__(self, parent=None):
         super(AdminOffers, self).__init__(parent)
         self.setupUi(self)
-        self.back_button.clicked.connect(self.gotoPanel)
+        self.back_button.clicked.connect(self.gotopanel)
 
-    def gotoPanel(self):
+    def gotopanel(self):
         widget.setCurrentWidget(admin_send)
+
 
 
 if __name__ == '__main__':
