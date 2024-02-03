@@ -65,7 +65,8 @@ def get_address(message):
         bot.message_handler(main_func(message))
         return
     address = message.text
-    offer_id = requests.post(f'http://127.0.0.1:8000/put_address_in_db?address={address}&prod_id={prod_id}').json()
+    user_id = message.from_user.id
+    offer_id = requests.post(f'http://127.0.0.1:8000/put_address_in_db?address={address}&prod_id={prod_id}&user_id={user_id}').json()
     offer_id = offer_id[0]
     bot.send_message(message.chat.id, f'Ваш заказ успешно зарегистрирован. ID товара: {prod_id}, '
                                       f'адрес доставки: {address}, номер заказа: {offer_id}')

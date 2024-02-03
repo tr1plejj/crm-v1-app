@@ -8,6 +8,7 @@ import admin
 import telebot
 from telebot import types
 import requests
+# import psycopg2
 
 import offers
 
@@ -63,11 +64,25 @@ class AdminOffers(QtWidgets.QMainWindow, offers.Ui_Dialog):
         super(AdminOffers, self).__init__(parent)
         self.setupUi(self)
         self.back_button.clicked.connect(self.gotopanel)
+        # self.offers_data.setItem(0, 0, QtWidgets.QTableWidgetItem('f'))
+        self.loaddata()
 
     def gotopanel(self):
         widget.setCurrentWidget(admin_send)
 
-
+    def loaddata(self):
+        try:
+            all_data = requests.get('http://127.0.0.1:8000/get_offers_data').json()
+            self.offers_data.setRowCount(len(all_data))
+            row = 0
+            for i in all_data:
+                self.offers_data.setItem(row, 0, QtWidgets.QTableWidgetItem(i[0]))
+                self.offers_data.setItem(row, 1, QtWidgets.QTableWidgetItem(str(i[1])))
+                self.offers_data.setItem(row, 2, QtWidgets.QTableWidgetItem(i[2]))
+                self.offers_data.setItem(row, 3, QtWidgets.QTableWidgetItem(str(i[3])))
+                row += 1
+        except:
+            print('ошибка загрузки данных')
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
