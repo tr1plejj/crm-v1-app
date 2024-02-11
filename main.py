@@ -1,6 +1,6 @@
 # python -m PyQt5.uic.pyuic -x admin.ui -o admin.py
 # python -m PyQt5.uic.pyuic -x offers.ui -o offers.py
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import sys
 import admin
@@ -9,7 +9,7 @@ from telebot import types
 import requests
 import offers
 
-TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
+TOKEN = token
 bot = telebot.TeleBot(TOKEN)
 tgk_chat_id = -1002112682526
 

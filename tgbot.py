@@ -3,7 +3,7 @@ import requests
 
 from telebot import types
 
-TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
+TOKEN = token
 bot = telebot.TeleBot(TOKEN)
 
 
