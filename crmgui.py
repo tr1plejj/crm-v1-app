@@ -5,8 +5,11 @@ import crmapp
 import telebot
 from telebot import types
 import requests
+from dotenv import load_dotenv
+import os
 
-TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
+load_dotenv()
+TOKEN = os.getenv('TOKEN')
 bot = telebot.TeleBot(TOKEN)
 tgk_chat_id = -1002112682526
 
@@ -24,17 +27,6 @@ class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
         self.exit_btn1.clicked.connect(self.exit)
         self.exit_btn2.clicked.connect(self.exit)
 
-    # def on_stackedWidget_currentChanged(self, index):
-    #     btn_list = self.icon_only_widget.findChildren(QPushButton) \
-    #         + self.full_menu_widget.findChildren(QPushButton)
-    #
-    #     for btn in btn_list:
-    #         if index in [5, 6]:
-    #             btn.setAutoExclusive(False)
-    #             btn.setChecked(False)
-    #             print('false')
-    #         else:
-    #             btn.setAutoExclusive(True)
     def add_image(self):
         pic = self.pic_path.text()
         self.label.setPixmap(QPixmap(pic))
@@ -130,5 +122,3 @@ if __name__ == '__main__':
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
-
-# посмотреть, что такое checkable и autoexclusive + погуглить подробнее про закоментированный код
