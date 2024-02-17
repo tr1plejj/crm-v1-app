@@ -1,7 +1,9 @@
 # python -m PyQt5.uic.pyuic -x admin.ui -o admin.py
 # python -m PyQt5.uic.pyuic -x offers.ui -o offers.py
+# python -m PyQt5.uic.pyuic -x crmapp.ui -o crmapp.py
 from PyQt5 import QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtGui import QImage
+from PyQt5.QtWidgets import QMessageBox, QMainWindow
 import sys
 import admin
 import telebot
@@ -9,12 +11,12 @@ from telebot import types
 import requests
 import offers
 
-TOKEN = token
+TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
 bot = telebot.TeleBot(TOKEN)
 tgk_chat_id = -1002112682526
 
 
-class AdminSend(QtWidgets.QMainWindow, admin.Ui_Dialog):
+class AdminSend(QMainWindow, admin.Ui_Dialog):
     def __init__(self, parent=None):
         super(AdminSend, self).__init__(parent)
         self.setupUi(self)
@@ -38,7 +40,7 @@ class AdminSend(QtWidgets.QMainWindow, admin.Ui_Dialog):
         pic = self.pic_path.text()
         try:
             prod_id = (requests.post(f'http://127.0.0.1:8000/put_in_db?name={name}&price={price}&description={desc}').json())
-            prod_id = prod_id[0]
+            prod_id = int(prod_id)
             markup = types.InlineKeyboardMarkup()
             offer_button = types.InlineKeyboardButton(text='Offer', url='t.me/ReOrSellerBot')
             markup.add(offer_button)
@@ -57,7 +59,7 @@ class AdminSend(QtWidgets.QMainWindow, admin.Ui_Dialog):
             self.pic_path.clear()
 
 
-class AdminOffers(QtWidgets.QMainWindow, offers.Ui_Dialog):
+class AdminOffers(QMainWindow, offers.Ui_Dialog):
     def __init__(self, parent=None):
         super(AdminOffers, self).__init__(parent)
         self.setupUi(self)
@@ -77,10 +79,10 @@ class AdminOffers(QtWidgets.QMainWindow, offers.Ui_Dialog):
             self.offers_data.setRowCount(len(all_data))
             row = 0
             for i in all_data:
-                self.offers_data.setItem(row, 0, QtWidgets.QTableWidgetItem(i[0]))
-                self.offers_data.setItem(row, 1, QtWidgets.QTableWidgetItem(str(i[1])))
-                self.offers_data.setItem(row, 2, QtWidgets.QTableWidgetItem(i[2]))
-                self.offers_data.setItem(row, 3, QtWidgets.QTableWidgetItem(str(i[3])))
+                self.offers_data.setItem(row, 0, QtWidgets.QTableWidgetItem(i['name']))
+                self.offers_data.setItem(row, 1, QtWidgets.QTableWidgetItem(str(i['prod_id'])))
+                self.offers_data.setItem(row, 2, QtWidgets.QTableWidgetItem(i['address']))
+                self.offers_data.setItem(row, 3, QtWidgets.QTableWidgetItem(str(i['offer_id'])))
                 row += 1
         except Exception as e:
             print('ошибка загрузки данных', e)

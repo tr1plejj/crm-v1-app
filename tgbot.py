@@ -3,7 +3,7 @@ import requests
 
 from telebot import types
 
-TOKEN = token
+TOKEN = '6095405341:AAGVEIaNq0i6qdISCC2VtM3r3aExJN0jwQI'
 bot = telebot.TeleBot(TOKEN)
 
 
@@ -13,7 +13,6 @@ def main_func(message):
     id_button = types.KeyboardButton('Сделать заказ')
     markup.add(id_button)
     bot.send_message(message.chat.id, text='Нажмите кнопку "Сделать заказ" для продолжения', reply_markup=markup)
-    print(message.text, 'start')
 
 
 @bot.message_handler(func=lambda message: message.text == 'Сделать заказ')
@@ -23,7 +22,6 @@ def answer_on_offer(message):
     markup.add(no)
     bot.send_message(message.chat.id, 'Введите id товара', reply_markup=markup)
     bot.register_next_step_handler(message, return_db_data)
-    print(message.text, 'answer on offer')
 
 
 def return_db_data(message):
@@ -38,9 +36,9 @@ def return_db_data(message):
         markup.row(yes, no)
         prod_id = message.text
         data = requests.get(f'http://127.0.0.1:8000/take_from_db/{prod_id}').json()
-        name = data[0][0]
-        price = data[0][1]
-        desc = data[0][2]
+        name = data['name']
+        price = data['price']
+        desc = data['description']
         bot.send_message(message.chat.id, f'Название товара: {name}\nЦена: {price}\nОписание: {desc}')
         bot.send_message(message.chat.id, 'Оформить заказ?', reply_markup=markup)
         bot.register_next_step_handler(message, confirm_offer)
@@ -68,8 +66,7 @@ def get_address(message):
         bot.message_handler(main_func(message))
     address = message.text
     user_id = message.from_user.id
-    offer_id = requests.post(f'http://127.0.0.1:8000/put_address_in_db?address={address}&prod_id={prod_id}&user_id={user_id}').json()
-    offer_id = offer_id[0]
+    offer_id = requests.post(f'http://127.0.0.1:8000/put_address_in_db?address={address}&prod_id={prod_id}&user_id={user_id}').text
     bot.send_message(message.chat.id, f'Ваш заказ успешно зарегистрирован. ID товара: {prod_id}, '
                                       f'адрес доставки: {address}, номер заказа: {offer_id}')
     bot.message_handler(answer_on_offer(message))
