@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidgetItem, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidgetItem, QMessageBox, QPushButton
 from PyQt5.QtGui import QPixmap
 import crmapp
 import telebot
@@ -24,8 +24,6 @@ class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
         self.send_product_btn.clicked.connect(self.message_in_channel)
         self.upload_photo_btn.clicked.connect(self.add_image)
         self.send_current_offer_btn.clicked.connect(self.send_success_to_user)
-        self.exit_btn1.clicked.connect(self.exit)
-        self.exit_btn2.clicked.connect(self.exit)
 
     def add_image(self):
         pic = self.pic_path.text()
@@ -45,10 +43,12 @@ class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
 
     def on_user_btn_toggled(self):
         self.stackedWidget.setCurrentIndex(0)
-
-    @staticmethod
-    def exit():
-        sys.exit(app.exec_())
+        # if self.user_btn.isChecked():
+        #     self.product_btn1.setChecked(False)
+        #     self.product_btn1.setAutoExclusive(False)
+        # else:
+        #     self.product_btn1.setAutoExclusive(True)
+    #     разобраться с кнопками и понять почему если нажимать на юзер то кнопка меняет свой цвет
 
     def load_all_data(self):
         try:
@@ -65,7 +65,7 @@ class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
             print('ошибка загрузки данных', e)
 
     @bot.message_handler()
-    def send_success_to_user(self, message):
+    def send_success_to_user(self):
         try:
             cur_row = self.offers_table_widget.currentRow()
             select = QMessageBox.warning(self, 'Предупреждение', f'Вы уверены, что хотите отправить заказ?\n'
@@ -87,7 +87,7 @@ class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
             print('error', e)
 
     @bot.message_handler()
-    def message_in_channel(self, message):
+    def message_in_channel(self):
         name = self.name.text()
         price = self.price.text()
         desc = self.description.text()

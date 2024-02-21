@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>activity-feed-64.ico</file>
+    <file>activity-feed-64-pressed.ico</file>
+    <file>arrow-53-64.ico</file>
+    <file>arrow-53-64-pressed.ico</file>
+    <file>close-window-64.ico</file>
+    <file>menu-4-64.ico</file>
+    <file>message-outline-64.ico</file>
+    <file>message-outline-64-pressed.ico</file>
+    <file>product-64.ico</file>
+    <file>product-64-pressed.ico</file>
+    <file>user-64.ico</file>
+    <file>user-64-pressed.ico</file>
+  </qresource>
+</RCC>
