@@ -1,17 +1,14 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidgetItem, QMessageBox, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidgetItem, QMessageBox
 from PyQt5.QtGui import QPixmap
 import crmapp
-import telebot
-from telebot import types
+from telebot import TeleBot, types
 import requests
-from dotenv import load_dotenv
-import os
+from os import getenv
 
-load_dotenv()
-TOKEN = os.getenv('TOKEN')
-bot = telebot.TeleBot(TOKEN)
-tgk_chat_id = -1002112682526
+TOKEN = getenv('TOKEN')
+tgk_chat_id = int(getenv('TGKCHATID'))
+bot = TeleBot(TOKEN)
 
 
 class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
@@ -43,12 +40,6 @@ class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
 
     def on_user_btn_toggled(self):
         self.stackedWidget.setCurrentIndex(0)
-        # if self.user_btn.isChecked():
-        #     self.product_btn1.setChecked(False)
-        #     self.product_btn1.setAutoExclusive(False)
-        # else:
-        #     self.product_btn1.setAutoExclusive(True)
-    #     разобраться с кнопками и понять почему если нажимать на юзер то кнопка меняет свой цвет
 
     def load_all_data(self):
         try:
@@ -98,7 +89,7 @@ class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
             )
             prod_id = int(prod_id)
             markup = types.InlineKeyboardMarkup()
-            offer_button = types.InlineKeyboardButton(text='Offer', url='t.me/ReOrSellerBot')
+            offer_button = types.InlineKeyboardButton(text='Заказать', url='t.me/ReOrSellerBot')
             markup.add(offer_button)
             img = open(pic, 'rb')
             bot.send_photo(tgk_chat_id,
