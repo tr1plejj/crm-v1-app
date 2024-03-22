@@ -91,11 +91,11 @@ class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
 
     def load_all_data(self):
         try:
-            all_data = requests.get(f'{main_api_url}/api/orders/', headers=self.headers).json()
+            all_data = requests.get(f'{main_api_url}/api/orders/list/', headers=self.headers).json()
             self.offers_table_widget.setRowCount(len(all_data))
             row = 0
             for i in all_data:
-                product = requests.get(url=f'{main_api_url}/api/product/{i.get('product')}', headers=self.headers).json()
+                product = requests.get(url=f'{main_api_url}/api/product/get/{i.get('product')}', headers=self.headers).json()
                 self.offers_table_widget.setItem(row, 0, QTableWidgetItem(product.get('title')))
                 self.offers_table_widget.setItem(row, 1, QTableWidgetItem(str(i.get('product'))))
                 self.offers_table_widget.setItem(row, 2, QTableWidgetItem(i.get('address')))
@@ -135,11 +135,11 @@ class MainWindow(QMainWindow, crmapp.Ui_MainWindow):
         pic = self.pic_path.text()
         data = {'title': name, 'description': desc, 'price': price}
         try:
+            img = open(pic, 'rb')
             prod_id = requests.post(f'{main_api_url}/api/products/', headers=self.headers, data=data).json().get('id')
             markup = types.InlineKeyboardMarkup()
             offer_button = types.InlineKeyboardButton(text='Заказать', url='t.me/ReOrSellerBot')
             markup.add(offer_button)
-            img = open(pic, 'rb')
             bot.send_photo(tgk_chat_id,
                            photo=img,
                            caption=f'Товар: {name}\nЦена: {price}\nОписание: {desc}\nID товара: {prod_id}',
