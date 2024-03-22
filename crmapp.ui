@@ -459,19 +459,125 @@ QPushButton:hover {
          <property name="currentIndex">
           <number>2</number>
          </property>
+         <widget class="QWidget" name="auth_page">
+          <widget class="QLineEdit" name="username_login">
+           <property name="geometry">
+            <rect>
+             <x>240</x>
+             <y>240</y>
+             <width>121</width>
+             <height>20</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="password_login">
+           <property name="geometry">
+            <rect>
+             <x>240</x>
+             <y>290</y>
+             <width>121</width>
+             <height>20</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="login_btn">
+           <property name="geometry">
+            <rect>
+             <x>260</x>
+             <y>340</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Login</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="switch_register_btn">
+           <property name="geometry">
+            <rect>
+             <x>260</x>
+             <y>390</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Register</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="register_page">
+          <widget class="QLineEdit" name="username_register">
+           <property name="geometry">
+            <rect>
+             <x>200</x>
+             <y>230</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="password_register">
+           <property name="geometry">
+            <rect>
+             <x>200</x>
+             <y>280</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="create_user_btn">
+           <property name="geometry">
+            <rect>
+             <x>310</x>
+             <y>370</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>PushButton</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="switch_login_btn">
+           <property name="geometry">
+            <rect>
+             <x>390</x>
+             <y>440</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>PushButton</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="email">
+           <property name="geometry">
+            <rect>
+             <x>280</x>
+             <y>170</y>
+             <width>113</width>
+             <height>20</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
          <widget class="QWidget" name="user_page">
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Username:</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_3">
              <property name="text">
               <string>Total offers:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Username:</string>
              </property>
             </widget>
            </item>
